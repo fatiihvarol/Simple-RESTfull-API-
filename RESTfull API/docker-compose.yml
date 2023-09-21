@@ -1,0 +1,19 @@
+version: "3"
+services:
+  app:
+    image: my-go-app-image
+    container_name: my-go-app-container
+    ports:
+      - "8080:8080"  # Uygulama portu
+    depends_on:
+      - postgresCont  # PostgreSQL konteynerinin başlamasını bekler
+
+  postgresCont:
+    image: postgres:latest
+    container_name: postgres-container
+    environment:
+      POSTGRES_USER: 127.0.0.1
+      POSTGRES_PASSWORD: pass123
+      POSTGRES_DB: tsl_employee
+    ports:
+      - "5433:5432"  # PostgreSQL portu (5433'ten dışarı bağla)
